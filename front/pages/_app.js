@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import AppLayout from '../components/AppLayout';
 
 const SNS = ({Component}) => {
@@ -15,5 +16,9 @@ const SNS = ({Component}) => {
         </>
     )
 };
+
+SNS.propTypes = {
+    Component : PropTypes.elementType,
+}
 
 export default SNS;
