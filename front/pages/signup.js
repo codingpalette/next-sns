@@ -9,9 +9,24 @@ const Signup = () => {
     const [password , setPassword] = useState('');
     const [passwordCheck , setPasswordCheck] = useState('');
     const [term , setTerm] = useState(false);
+    const [passwordError , setPasswordError] = useState(false);
+    const [termError , setTermError] = useState(false);
 
-    const onSubmit = () => {
-
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if(password !== passwordCheck) {
+            return setPasswordError(true);
+        }
+        if(!term) {
+            return setTermError(true);
+        }
+        console.log({
+            id,
+            nick,
+            password,
+            passwordCheck,
+            term
+        })
     };
     const onChangeId = (e) => {
         setId(e.target.value)
@@ -23,10 +38,12 @@ const Signup = () => {
         setPassword(e.target.value)
     };
     const onChangePasswordCheck = (e) => {
+        setPasswordError(e.target.value !== password)
         setPasswordCheck(e.target.value)
     };
     const onChangeTerm = (e) => {
-        setTerm(e.target.value)
+        setTermError(false);
+        setTerm(e.target.checked)
     };
     
 
@@ -57,11 +74,13 @@ const Signup = () => {
                     <label htmlFor="user-pass-check">비밀번호체크</label>
                     <br />
                     <Input name="user-password-check" type="password" required value={passwordCheck} onChange={onChangePasswordCheck} />
+                    {passwordError && <div style={{color:'red'}}>비밀번호가 일치하지 않습니다.</div> }
                 </div>
                 <div>
-                    <Checkbox name="user-term" value={term} onChange={onChangeTerm}>동의해야 합니다.</Checkbox>
+                    <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>동의해야 합니다.</Checkbox>
+                    {termError && <div style={{color:'red'}}>약관에 동의하셔야 합니다.</div> }
                 </div>
-                <div>
+                <div style={{marginTop : 10}}>
                     <Button type="primary" htmlType="submit">가입하기</Button>
                 </div>
             </Form>
