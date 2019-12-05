@@ -1,11 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
+import withRedux from 'next-redux-wrapper'
 import AppLayout from '../components/AppLayout';
+import { Provider } from 'react-redux'
+import reducer from '../reducers'
+import { createStore } from 'redux';
 
-const SNS = ({Component}) => {
+
+const SNS = ({Component , store}) => {
     return(
-        <>
+        <Provider store={store}>
         <Head>
             <title>SNS</title>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.23.6/antd.css" />
@@ -13,12 +18,17 @@ const SNS = ({Component}) => {
         <AppLayout>
             <Component />
         </AppLayout>
-        </>
+        </Provider>
     )
 };
 
 SNS.propTypes = {
     Component : PropTypes.elementType,
+    store : PropTypes.object,
 }
 
-export default SNS;
+export default withRedux((initialState , options) => {
+    const store = createStore(reducer , initialState);
+    // 여기에 store 커스터마이징
+    return store;
+})(SNS);
