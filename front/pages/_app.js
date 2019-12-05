@@ -5,7 +5,7 @@ import withRedux from 'next-redux-wrapper'
 import AppLayout from '../components/AppLayout';
 import { Provider } from 'react-redux'
 import reducer from '../reducers'
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 
 
 const SNS = ({Component , store}) => {
@@ -28,7 +28,9 @@ SNS.propTypes = {
 }
 
 export default withRedux((initialState , options) => {
-    const store = createStore(reducer , initialState);
+    const middlewares = [];
+    const enhancer = compose(applyMiddleware(...middlewares))
+    const store = createStore(reducer , initialState , enhancer);
     // 여기에 store 커스터마이징
     return store;
 })(SNS);

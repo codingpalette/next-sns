@@ -1,21 +1,10 @@
 import React from 'react';
 import { Form, Input, Button } from 'antd';
-
-const dummy = {
-    imagePaths : [],
-    isLoggedIn : true,
-    mainPost : [{
-        User : {
-            id : 1,
-            nickname : '이성재', 
-        },
-        content : '안녕하세요',
-        img : 'https://cdn.pixabay.com/photo/2016/11/18/18/58/couple-1836407_1280.jpg'
-    }],
-}
-
+import { useSelector } from 'react-redux';
 
 const PostForm = () => {
+    const { imagePaths } = useSelector( state => state.post );
+
     return(
         <>
             <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data">
@@ -26,7 +15,7 @@ const PostForm = () => {
                     <Button type="primary" style={{float:'right'}} htmlType="submit">등록</Button>
                 </div>
                 <div>
-                    {dummy.imagePaths.map((v , i) => {
+                    {imagePaths.map((v , i) => {
                         return(
                             <div key={v} style={{display:'inline-block'}}>
                                 <img src={'http://localhost:3065/' + v} style={{width:'200px'}} alt={v} />

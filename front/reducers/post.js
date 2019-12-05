@@ -1,5 +1,13 @@
 export const initialState = {
-    mainPosts : [],
+    mainPosts : [{
+        User : {
+            id : 1,
+            nickname : '이성재', 
+        },
+        content : '안녕하세요',
+        img : 'https://cdn.pixabay.com/photo/2016/11/18/18/58/couple-1836407_1280.jpg'
+    }],
+    imagePaths : [],
 };
 
 const ADD_POST = 'ADD_POST';
