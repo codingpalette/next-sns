@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux';
 
 
 const HOME = () => { 
-    const { isLoggedIn } = useSelector( state => state.user );
+    const { me } = useSelector( state => state.user );
     const { mainPosts } = useSelector( state => state.post );
 
     return(
         <div>
-            {isLoggedIn && (
+            {me && (
                 <>
                     <PostForm></PostForm>
                 </>

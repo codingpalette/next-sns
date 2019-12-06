@@ -1,17 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import withRedux from 'next-redux-wrapper'
-import AppLayout from '../components/AppLayout';
-import { Provider } from 'react-redux'
-import reducer from '../reducers'
+import withRedux from 'next-redux-wrapper';
 import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
+import AppLayout from '../components/AppLayout';
+import reducer from '../reducers';
 import rootSaga from '../sagas';
 
 
-const SNS = ({Component , store}) => {
-    return(
+const SNS = ({ Component, store }) => {
+    return (
         <Provider store={store}>
         <Head>
             <title>SNS</title>
@@ -25,8 +25,8 @@ const SNS = ({Component , store}) => {
 };
 
 SNS.propTypes = {
-    Component : PropTypes.elementType,
-    store : PropTypes.object,
+    Component : PropTypes.elementType.isRequired,
+    store : PropTypes.object.isRequired
 }
 
 const configureStore = (initialState, options) => {
