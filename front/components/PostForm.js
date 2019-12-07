@@ -1,18 +1,39 @@
-import React from 'react';
+import React , { useCallback, useState , useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector , useDispatch } from 'react-redux';
+import { ADD_POST_REQUEST } from '../reducers/post';
 
 const PostForm = () => {
-    const { imagePaths } = useSelector( state => state.post );
+    const dispatch = useDispatch();
+    const { imagePaths , isAddingPost , postAdded} = useSelector( state => state.post );
+    const [text , setText] = useState('');
+
+    useEffect( () => {
+        setText('');
+    }, [ postAdded === true ]);
+
+    const onSubmitForm = useCallback((e) => {  // props 로 들어가는 함수는 무조건 useCallback
+        e.preventDefault();
+        dispatch({
+            type : ADD_POST_REQUEST,
+            data : {
+                text,
+            }
+        })
+    }, []);
+
+    const onChangeText = useCallback((e) => {
+        setText( e.target.value )
+    }, []);
 
     return(
         <>
-            <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data">
-                <Input.TextArea maxLength={140} placeholder="일상생활을 적어주세요" />
+            <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data" onSubmit={onSubmitForm}>
+                <Input.TextArea maxLength={140} placeholder="일상생활을 적어주세요" value={text} onChange={onChangeText} />
                 <div>
                     <input type="file" multiple hidden />
                     <Button>이미지 업로드</Button>
-                    <Button type="primary" style={{float:'right'}} htmlType="submit">등록</Button>
+                    <Button type="primary" style={{float:'right'}} htmlType="submit" loading={isAddingPost}>등록</Button>
                 </div>
                 <div>
                     {imagePaths.map((v , i) => {

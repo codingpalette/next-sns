@@ -6,7 +6,7 @@ export const initialState = {
             nickname: '제로초',
         },
         content: '첫 번째 게시글',
-        img: 'https://bookthumb-phinf.pstatic.net/cover/137/995/13799585.jpg?udate=20180726',
+        img: 'https://cdn.pixabay.com/photo/2016/11/18/18/58/couple-1836407_1280.jpg',
         Comments: [],
     }], // 화면에 보일 포스트들
     imagePaths: [], // 미리보기 이미지 경로
@@ -100,7 +100,7 @@ const reducer = (state = initialState , action) => {
             return {
                 ...state,
                 isAddingPost: false,
-                mainPosts: [action.data, ...state.mainPosts],
+                mainPosts: [dummyPost, ...state.mainPosts],
                 postAdded: true,
             };
         }
