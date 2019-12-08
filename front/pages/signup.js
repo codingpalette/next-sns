@@ -33,12 +33,12 @@ const Signup = () => {
         dispatch({
             type : SIGN_UP_REQUEST,
             data : {
-                id,
-                nick,
+                userId : id,
+                nickname : nick,
                 password
             }
         });
-    }, [password , passwordCheck , term]);
+    }, [id , nick , password , passwordCheck , term]);
     const onChangeId = (e) => {
         setId(e.target.value)
     };

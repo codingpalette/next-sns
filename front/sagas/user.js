@@ -28,15 +28,16 @@ function* watchLogin() {
     yield takeLatest(LOG_IN_REQUEST, login)
 };
 
-function signUPAPI() {
+function signUPAPI(signUpData) {
     // 서버에 요청을 보냄
+    return axios.post('http://localhost:5000/api/user/' , signUpData);
 };
 
-function* signUp() {
+function* signUp(action) {
     try{
-        // yield call(signUPAPI);
-        yield delay(1000)
-        throw new Error('에러입니다.');
+        yield call(signUPAPI , action.data);
+        // yield delay(1000)
+        // throw new Error('에러입니다.');
         yield put({
             type : SIGN_UP_SUCCESS,
         });

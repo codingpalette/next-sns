@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');  // 비밀번호 암호화
 const passport = require('passport');
 const db = require('../models');
 
