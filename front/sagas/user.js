@@ -2,7 +2,6 @@ import { all, fork , takeLatest , takeEvery , call , put , delay} from 'redux-sa
 import { LOG_IN_REQUEST , LOG_IN_SUCCESS , LOG_IN_FAILURE, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_OUT_SUCCESS, LOG_OUT_FAILURE, LOG_OUT_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, LOAD_USER_REQUEST } from '../reducers/user';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
 
 function loginAPI(loginData) {
     // 서버에 요청을 보냄
