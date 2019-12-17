@@ -10,7 +10,7 @@ import reducer from '../reducers';
 import rootSaga from '../sagas';
 
 
-const SNS = ({ Component, store }) => {
+const SNS = ({ Component, store, pageProps }) => {
     return (
         <Provider store={store}>
         <Head>
@@ -18,7 +18,7 @@ const SNS = ({ Component, store }) => {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.23.6/antd.css" />
         </Head>
         <AppLayout>
-            <Component />
+            <Component {...pageProps} />
         </AppLayout>
         </Provider>
     )
@@ -28,6 +28,16 @@ SNS.propTypes = {
     Component : PropTypes.elementType.isRequired,
     store : PropTypes.object.isRequired
 }
+
+SNS.getInitialProps = async (context) => {
+    console.log(context);
+    const { ctx, Component } = context;
+    let pageProps = {};
+    if (Component.getInitialProps) {
+        pageProps = await Component.getInitialProps(ctx);
+    }
+    return { pageProps };
+};
 
 const configureStore = (initialState, options) => {
     const sagaMiddleware = createSagaMiddleware();

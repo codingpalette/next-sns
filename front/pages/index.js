@@ -19,11 +19,7 @@ const HOME = () => {
 
     return(
         <div>
-            {me && (
-                <>
-                    <PostForm></PostForm>
-                </>
-            )}
+            {me && <PostForm />}
             {mainPosts.map((c) => {
                 return(
                     <PostCard key={c} post={c}></PostCard>
